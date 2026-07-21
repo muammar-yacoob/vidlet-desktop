@@ -1,0 +1,43 @@
+{
+	"name": "vidlet-desktop",
+	"productName": "VidLet",
+	"version": "1.0.0",
+	"description": "VidLet desktop - free local video tools in a native window",
+	"private": true,
+	"main": "main.js",
+	"author": "spark-apps",
+	"license": "AGPL-3.0",
+	"scripts": {
+		"start": "electron .",
+		"dist": "electron-builder"
+	},
+	"devDependencies": {
+		"electron": "^43.1.1",
+		"electron-builder": "^26.15.3"
+	},
+	"build": {
+		"appId": "app.vidlet.desktop",
+		"productName": "VidLet",
+		"files": ["main.js"],
+		"win": {
+			"target": "nsis",
+			"icon": "build/icon.ico"
+		},
+		"nsis": {
+			"oneClick": true,
+			"artifactName": "VidLet-Setup.exe"
+		},
+		"linux": {
+			"target": ["AppImage"],
+			"icon": "build/icon.png",
+			"category": "AudioVideo",
+			"artifactName": "VidLet.AppImage"
+		},
+		"publish": {
+			"provider": "github",
+			"owner": "muammar-yacoob",
+			"repo": "vidlet-desktop",
+			"releaseType": "release"
+		}
+	}
+}
