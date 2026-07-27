@@ -17,7 +17,8 @@ const {
 } = require("electron");
 const path = require("node:path");
 
-const APP_URL = "https://vidlet.app";
+// The editor, not the marketing landing page - the shell exists to be the app.
+const APP_URL = "https://vidlet.app/app";
 
 function createWindow() {
 	const win = new BrowserWindow({
