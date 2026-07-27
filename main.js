@@ -30,8 +30,23 @@ function createWindow() {
 		icon: path.join(__dirname, "build", "icon.png"),
 	});
 	win.loadURL(APP_URL);
+	// The site's teleprompter opens a named popup (Chromium's doc-PiP isn't
+	// available in Electron); promote it to a small always-on-top window so
+	// it floats over whatever is being recorded.
 	// External links (GitHub, Buy me a coffee, ...) open in the OS browser.
-	win.webContents.setWindowOpenHandler(({ url }) => {
+	win.webContents.setWindowOpenHandler(({ url, frameName }) => {
+		if (frameName === "vidlet-teleprompter") {
+			return {
+				action: "allow",
+				overrideBrowserWindowOptions: {
+					width: 400,
+					height: 480,
+					alwaysOnTop: true,
+					autoHideMenuBar: true,
+					backgroundColor: "#0a0a0a",
+				},
+			};
+		}
 		shell.openExternal(url);
 		return { action: "deny" };
 	});
